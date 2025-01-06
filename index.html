@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsywny One Page Site</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Globalne style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #1a1a1a;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        header nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        header nav a.active {
+            color: #00adb5;
+        }
+        header nav a:hover {
+            color: #00adb5;
+        }
+		.logo-container {
+			display: flex;
+			align-items: stretch;
+			gap: 10px;
+		}
+		.logo {
+			width: 100px; /* Dostosuj rozmiar logo */
+			height: auto;
+			border-radius: 5px; /* Opcjonalnie zaokrąglij logo */
+		}
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+		
+        /* Sekcja Home */
+		#home {
+			padding: 60px 20px;
+			background: linear-gradient(135deg, #e6b800, #d4a200);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+			text-align: left;
+		}
+		.home-container {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			max-width: 1200px;
+			margin: 0 auto;
+			gap: 20px;
+		}
+		.home-image {
+			flex: 1;
+			max-width: 50%;
+			text-align: center;
+		}
+		.home-image img {
+			width: 100%;
+			max-width: 400px;
+			border-radius: 10px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+		}
+		.home-text {
+			flex: 1;
+			max-width: 50%;
+		}
+		.home-text h1 {
+			font-size: 2.5rem;
+			margin-bottom: 15px;
+			text-align: center;
+		}
+		.home-text p {
+			font-size: 1.2rem;
+			margin-bottom: 20px;
+			color: #000000;
+			line-height: 1.6;
+			text-align: center;
+		}
+		.home-text .btn {
+			display: inline-block;
+			padding: 10px 20px;
+			background: #000000;
+			color: #fff;
+			border-radius: 5px;
+			text-decoration: none;
+			font-weight: bold;
+			transition: background 0.3s ease;
+		}
+		.home-text .btn:hover {
+			background: #d4a200;
+		}
+        #about {
+            background: linear-gradient(135deg, #393e46, #222831);
+        }
+        #services {
+            background: linear-gradient(135deg, #222831, #1a1a1a);
+        }
+        #contact {
+            background: linear-gradient(135deg, #e6b800, #d4a200);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #1a1a1a;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Pływający przycisk "Call Now" */
+        .call-now {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #000000;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .call-now:hover {
+            background-color: #d4a200;
+            transform: scale(1.1);
+        }
+        .call-now .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            position: relative;
+        }
+        .call-now .icon:before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .call-now .icon:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border: 2px solid white;
+            border-radius: 0 50% 50% 0;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+
+        /* Galeria zdjęć */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+		
+		/* Lightbox: ukrycie pełnoekranowego widoku */
+		.lightbox {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.8);
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
+		.lightbox img {
+			max-width: 90%;
+			max-height: 90%;
+			border-radius: 10px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+		}
+		.lightbox:target {
+			display: flex;
+		}
+		
+		/* Stylizacja listy usług */
+	.service-list {
+		list-style: none;
+		padding: 0;
+		margin-top: 20px;
+		text-align: left;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.service-list li {
+		background: #d4a200;
+		color: #fff;
+		padding: 10px 15px;
+		margin-bottom: 10px;
+		border-radius: 5px;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	.service-list li:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+	}
+		
+
+        /* Responsywne style */
+        @media (max-width: 768px) {
+            .call-now {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            .call-now .icon {
+                width: 15px;
+                height: 15px;
+            }
+			
+			.home-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .home-image, .home-text {
+        max-width: 100%;
+    }
+    .home-text h1 {
+        font-size: 2rem;
+    }
+    .home-text p {
+        font-size: 1rem;
+    }
+			
+        }
+    </style>
+</head>
+<body>
+    <!-- Główna nawigacja -->
+    <header>
+        <nav>
+            <a href="#home">Strona Główna</a>
+            <a href="#about">Przykładowe realizacje</a>
+            <a href="#services">Oferta</a>
+            <a href="#contact">Kontakt</a>
+			<a href="https://www.facebook.com/profile.php?id=100071757307630" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i>acebook</a>
+        </nav>
+    </header>
+
+    <!-- Sekcje -->
+    <section id="home">
+		<div class="home-container">
+			<!-- Zdjęcie po lewej -->
+			<div class="home-image">
+				<img src="main.jpeg" alt="Home Image">
+			</div>
+			<!-- Tekst po prawej -->
+			<div class="home-text">
+				<h1><strong>JTE roboty ziemne</strong></h1>
+				<p>Wykonujemy usługi z użyciem minikoparki, koparko-ładowarki, wywrotki DMC 3,5 tony. Specjalizujemy się w wykonaniu prac ziemnych oraz różnego rodzaju wykopów.</p>
+				<a href="#services" class="btn">Sprawdź naszą ofertę</a>
+			</div>
+		</div>
+	</section>
+
+    <section id="about">
+        <div>
+            <h1>Przykładowe realizacje</h1>
+
+            <!-- Galeria zdjęć -->
+        <div class="gallery">
+            <a href="1.jpg" class="gallery-item">
+                <img src="1.jpg" alt="Gallery Image 1">
+            </a>
+            <a href="2.jpg" class="gallery-item">
+                <img src="2.jpg" alt="Gallery Image 2">
+            </a>
+            <a href="3.jpg" class="gallery-item">
+                <img src="3.jpg" alt="Gallery Image 3">
+            </a>
+            <a href="4.jpg" class="gallery-item">
+                <img src="4.jpg" alt="Gallery Image 4">
+            </a>
+            <a href="5.jpg" class="gallery-item">
+                <img src="5.jpg" alt="Gallery Image 5">
+            </a>
+            <a href="6.jpg" class="gallery-item">
+                <img src="6.jpg" alt="Gallery Image 6">
+            </a>
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+         <div>
+        <h1>Oferta</h1>
+        <p>w naszej firmie wykonujemy m.in.:</p>
+        
+        <!-- Lista usług -->
+        <ul class="service-list">
+            <li>transport wywrotka 15 ton</li>
+            <li>wykopy pod fundamenty</li>
+            <li>zbieranie ziemi pod budowę</li>
+            <li>równanie terenu</li>
+            <li>wszelkie rodzaje wykopów</li>
+            <li>wykopy pod przyłącza (woda, gaz, prąd)</li>
+        </ul>
+    </div>
+    </section>
+
+    <section id="contact">
+        <div>
+        <h1>Dane adresowe</h1>
+
+        <!-- Informacje kontaktowe -->
+        <div class="contact-details">
+            <p><strong>Telefon:</strong> 661-850-136</p>
+            <p><strong>NIP</strong> 6222571491</p>
+            <p><strong>Adres:</strong> JTE roboty ziemne Tobiasz Kwiasowski<br> ul. Środkowa 1, 63-460 Fabianów</p>
+        </div>
+
+        <!-- Mapa Google -->
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2442.2957658900675!2d21.01222841579349!3d52.229675979758614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669f22fd35%3A0x42b79b39f40f9e12!2sWarsaw!5e0!3m2!1sen!2spl!4v1672956202010!5m2!1sen!2spl" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p>© 2025 Responsive One Page Site. All rights reserved.</p>
+    </footer>
+
+    <!-- Pływający przycisk "Call Now" -->
+    <a href="tel:+48123456789" class="call-now">
+         Zadzwoń teraz
+    </a>
+
+    <script>
+        // Zmiana koloru nagłówka podczas scrollowania
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Dodanie efektu widoczności sekcji
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+	
+	<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.createElement('div');
+        lightbox.classList.add('lightbox');
+        document.body.appendChild(lightbox);
+
+        const img = document.createElement('img');
+        lightbox.appendChild(img);
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                img.src = item.href;
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+    });
+</script>
+</body>
+</html>
