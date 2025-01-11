@@ -285,9 +285,12 @@
 
         /* Responsywne style */
 		@media (max-width: 2000px) {
-		.about {
-			height: 1000vh;
-		}
+		
+				section {
+				height: 1000vh;
+                flex-direction: column; /* Układ w kolumnie */
+                align-items: center; /* Wyśrodkowanie zawartości */
+            }
 		}
         @media (max-width: 768px) {
             .call-now {
