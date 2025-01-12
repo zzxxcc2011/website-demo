@@ -286,6 +286,19 @@
         /* Responsywne style */
 		@media (max-width: 768px) {
 		
+		.gallery {
+            display: block;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+		
 				section {
 				display: block; /* Domyślnie dla sekcji */
 				overflow: visible; /* Upewnij się, że sekcja nie ukrywa zawartości */
@@ -414,7 +427,6 @@
             <a href="4A.jpg" class="gallery-item">
                 <img src="4A.jpg" alt="Gallery Image 4">
             </a>
-			            </a>
             <a href="2A.jpg" class="gallery-item">
                 <img src="2A.jpg" alt="Gallery Image 2">
             </a>
