@@ -287,10 +287,9 @@
 		@media (max-width: 768px) {
 		
 		.gallery {
-            display: block;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+			display: block; /* Domyślnie dla sekcji */
+			overflow: visible; /* Upewnij się, że sekcja nie ukrywa zawartości */
+			min-height: auto; /* Usuń ograniczenia wysokości */
         }
         .gallery-item {
             overflow: hidden;
