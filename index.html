@@ -61,7 +61,7 @@
 			border-radius: 5px; /* Opcjonalnie zaokrąglij logo */
 		}
         section {
-            height: 100vh;
+           /* height: 100vh; */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,6 +71,8 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.6s ease;
+			overflow: visible;
+			min-height: auto;
         }
         section.visible {
             opacity: 1;
@@ -212,13 +214,14 @@
 
         /* Galeria zdjęć */
         .gallery {
+			overflow: visible;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
         .gallery-item {
-            overflow: hidden;
+            overflow: visible;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -421,6 +424,33 @@
                 <img src="2A.jpg" alt="Gallery Image 2">
             </a>
             <a href="3A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="3A.jpg" alt="Gallery Image 3">
+            </a>
+            <a href="4A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="4A.jpg" alt="Gallery Image 4">
+            </a>
+            <a href="2A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="2A.jpg" alt="Gallery Image 2">
+            </a>
+            <a href="3A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="3A.jpg" alt="Gallery Image 3">
+            </a>
+            <a href="4A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="4A.jpg" alt="Gallery Image 4">
+            </a>
+			<a href="1A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="1A.jpg" alt="Gallery Image 1">
+            </a>
+            <a href="2A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="2A.jpg" alt="Gallery Image 2">
+            </a>
+            <a href="3A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="3A.jpg" alt="Gallery Image 3">
+            </a>
+            <a href="4A.jpg" class="gallery-item" style="min-height: auto;">
+                <img src="4A.jpg" alt="Gallery Image 4">
+            </a>
+			<a href="3A.jpg" class="gallery-item" style="min-height: auto;">
                 <img src="3A.jpg" alt="Gallery Image 3">
             </a>
             <a href="4A.jpg" class="gallery-item" style="min-height: auto;">
