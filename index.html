@@ -163,6 +163,56 @@
         }
 
         /* Pływający przycisk "Call Now" */
+        .facebook {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #000000;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .facebook:hover {
+            background-color: #d4a200;
+            transform: scale(1.1);
+        }
+        .facebook .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            position: relative;
+        }
+        .facebook .icon:before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .facebook .icon:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border: 2px solid white;
+            border-radius: 0 50% 50% 0;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+		
+		        /* Pływający przycisk "Call Now" */
         .call-now {
             position: fixed;
             bottom: 20px;
@@ -308,11 +358,20 @@
 }
 		}
         @media (max-width: 768px) {
-            .call-now {
+            .facebook {
                 padding: 10px 15px;
                 font-size: 0.9rem;
             }
-            .call-now .icon {
+            .facebook .icon {
+                width: 15px;
+                height: 15px;
+            }
+			
+			.facebook {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            .facebook .icon {
                 width: 15px;
                 height: 15px;
             }
@@ -355,7 +414,7 @@
             <a href="#about">Przykładowe realizacje</a>
             <a href="#services">Oferta</a>
             <a href="#contact">Kontakt</a>
-			<a href="https://www.facebook.com/profile.php?id=100071757307630" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i>acebook</a>
+			<!-- <a href="https://www.facebook.com/profile.php?id=100071757307630" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i>acebook</a> -->
         </nav>
     </header>
 
@@ -520,7 +579,7 @@
         <!-- Mapa Google -->
         <div class="map-container">
             <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2442.2957658900675!2d21.01222841579349!3d52.229675979758614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669f22fd35%3A0x42b79b39f40f9e12!2sWarsaw!5e0!3m2!1sen!2spl!4v1672956202010!5m2!1sen!2spl" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4279.891000213891!2d17.9090926368126!3d51.70757374930427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ac99b7ae2b7b5%3A0x45bc3f6a64377c22!2s%C5%9Arodkowa%201%2C%2063-460%20Fabian%C3%B3w!5e0!3m2!1spl!2spl!4v1736810958491!5m2!1spl!2spl"
                 width="100%" 
                 height="450" 
                 style="border:0;" 
@@ -538,9 +597,14 @@
     </footer>
 
     <!-- Pływający przycisk "Call Now" -->
-    <a href="tel:+48123456789" class="call-now">
+    <a href="tel:+48661850136" class="call-now">
          Zadzwoń teraz
     </a>
+	
+	    <!-- Pływający przycisk "Call Now" -->
+    <a href="https://www.facebook.com/profile.php?id=100071757307630" target="_blank" rel="noopener" class="facebook"><i class="fab fa-facebook-f"></i>acebook</a>
+	
+	<a href="https://www.facebook.com/profile.php?id=100071757307630" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i>acebook</a>
 
     <script>
         // Zmiana koloru nagłówka podczas scrollowania
